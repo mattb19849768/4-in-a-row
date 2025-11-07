@@ -1,0 +1,617 @@
+/* ===== Reset ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* ===== Index Page / Menu ===== */
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.menu-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.menu-card h1 {
+  margin-bottom: 10px;
+}
+
+.menu-card p.muted {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.setup {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.setup label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"] {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+output {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.checkboxes label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+button.primary {
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button.primary:hover {
+  background-color: #023e8a;
+}
+
+button.ghost {
+  background-color: transparent;
+  border: 1px solid #0077b6;
+  color: #0077b6;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+button.ghost:hover {
+  background-color: #0077b6;
+  color: white;
+}
+
+.menu-card p {
+  font-size: 13px;
+  color: #666;
+  margin-top: 10px;
+}
+
+/* ===== Topbar ===== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.controls-inline button {
+  margin-left: 5px;
+}
+
+.status {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* ===== Game Area ===== */
+.game-area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.board-pane {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  background-color: #0077b6;
+  padding: 5px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Cells */
+.cell {
+  background-color: #caf0f8;
+  width: 100%;
+  padding-top: 100%; /* square */
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.cell.filled {
+  cursor: default;
+}
+
+.cell.red::after,
+.cell.yellow::after {
+  content: '';
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+}
+
+.cell.red::after {
+  background-color: red;
+}
+
+.cell.yellow::after {
+  background-color: yellow;
+}
+
+/* Buttons (reuse from menu) */
+button.primary, button.ghost {
+  font-size: 14px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 500px) {
+  .board {
+    max-width: 90vw;
+  }
+  .row {
+    flex-direction: column;
+  }
+}
+
+/* Modal styles */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+.topbar .left a.home {
+  text-decoration: none;
+  color: #0077b6;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.topbar .left a.home:hover {
+  text-decoration: underline;
+}
+
+/* === NEON CYBERPUNK THEME ================================================= */
+
+:root {
+  --neon-pink: #ff007c;
+  --neon-cyan: #00eaff;
+  --dark-bg: #050510;
+}
+
+body {
+  background: var(--dark-bg);
+  color: var(--neon-cyan);
+}
+
+.topbar {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 6px var(--neon-cyan);
+}
+
+.topbar a.home {
+  color: var(--neon-pink);
+  text-shadow: 0 0 6px var(--neon-pink);
+}
+
+.status {
+  color: var(--neon-cyan);
+  font-weight: bold;
+  text-shadow: 0 0 6px var(--neon-cyan);
+}
+
+/* board look */
+.board {
+  background: transparent;
+  box-shadow: 0 0 32px rgba(0,0,0,0.4);
+}
+
+/* cell glow ring */
+.cell {
+  outline: 1px solid rgba(255,255,255,0.1);
+  box-shadow:
+    0 0 6px rgba(0,234,255,0.4) inset,
+    0 0 10px rgba(0,234,255,0.2);
+  border-radius: 50%;
+}
+
+/* piece colors */
+.cell.red.filled {
+  background: var(--neon-pink);
+  box-shadow: 0 0 14px var(--neon-pink), 0 0 30px var(--neon-pink);
+}
+.cell.yellow.filled {
+  background: var(--neon-cyan);
+  box-shadow: 0 0 14px var(--neon-cyan), 0 0 30px var(--neon-cyan);
+}
+
+/* modal glow */
+/* neon modal aggressive */
+.modal {
+  background:#000;
+  border:2px solid var(--neon-color);
+  padding:24px 32px;
+  border-radius:10px;
+  box-shadow:
+     0 0 18px var(--neon-color),
+     0 0 38px var(--neon-color),
+     inset 0 0 10px var(--neon-color);
+  text-align:center;
+  color:var(--neon-color);
+  max-width:300px;
+  width:90%;
+  animation:modalpop .25s ease-out;
+}
+
+@keyframes modalpop {
+  from { transform:scale(.85); opacity:0 }
+  to   { transform:scale(1);   opacity:1 }
+}
+
+
+.modal-content {
+  background: #0d0d20;
+  color: var(--neon-cyan);
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+.modal-content h2 {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+button.primary {
+  background: var(--neon-pink);
+  color: #fff;
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+button.ghost {
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 6px var(--neon-cyan);
+}
+button.primary:hover,
+button.ghost:hover {
+  filter: brightness(1.3);
+}
+
+/* aggressive neon variant */
+:root {
+  --neon-color: #00faff;
+}
+
+button.ghost,
+button.primary {
+  box-shadow: 0 0 6px var(--neon-color), inset 0 0 2px var(--neon-color);
+}
+
+button.ghost:hover,
+button.primary:hover {
+  box-shadow:
+     0 0 12px var(--neon-color),
+     0 0 22px var(--neon-color),
+     inset 0 0 6px var(--neon-color);
+  transform: translateY(-1px);
+}
+
+.status {
+  text-shadow: 0 0 14px var(--neon-color);
+}
+
+.board button.cell:hover {
+  box-shadow: 0 0 10px var(--neon-color) inset;
+}
+
+/* make the home button identical to the other topbar buttons */
+#homeBtn {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+}
+
+/* MODAL CENTER FIX */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* ===== Modal (centered + neon aggressive D) ===== */
+#winModal {
+  display: none;               /* shown via JS as 'flex' */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #0d0d20;
+  color: var(--neon-cyan, #00eaff);
+  border: 2px solid var(--neon-cyan, #00eaff);
+  box-shadow:
+     0 0 18px var(--neon-cyan, #00eaff),
+     0 0 38px var(--neon-cyan, #00eaff),
+     inset 0 0 10px var(--neon-cyan, #00eaff);
+  padding: 20px;
+  border-radius: 10px;
+  width: 92%;
+  max-width: 360px;
+  text-align: center;
+  animation: modalpop .22s ease-out;
+}
+
+.modal-close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--neon-cyan, #00eaff);
+}
+
+@keyframes modalpop {
+  from { transform: scale(.92); opacity: 0 }
+  to   { transform: scale(1);    opacity: 1 }
+}
+
+/* Neon pulsing frame around the gameboard */
+.game-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(7, 60px);
+  grid-template-rows: repeat(6, 60px);
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #111; /* dark interior */
+  position: relative;
+  box-shadow: 0 0 10px #00faff, 0 0 30px #00faff inset;
+  animation: pulseNeon 1.5s infinite alternate;
+}
+
+@keyframes pulseNeon {
+  0%   { box-shadow: 0 0 15px #00faff, 0 0 30px #00faff inset; }
+  50%  { box-shadow: 0 0 25px #00faff, 0 0 40px #00faff inset; }
+  100% { box-shadow: 0 0 15px #00faff, 0 0 30px #00faff inset; }
+}
+
+/* optional: slightly larger cells for neon effect */
+.cell {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #222;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.cell.red.filled { background: #ff004f; }
+.cell.yellow.filled { background: #fffc00; }
+.cell:hover { box-shadow: 0 0 12px #00faff inset; cursor: pointer; }
+
+/* menu card pop style */
+.menu-card {
+  background: linear-gradient(145deg, #111 0%, #222 100%);
+  border: 2px solid #00faff;
+  border-radius: 14px;
+  padding: 36px 28px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow:
+    0 0 10px #00faff,
+    0 0 30px #00faff inset;
+  text-align: center;
+  color: #00faff;
+  animation: pulseNeon 1.5s infinite alternate;
+}
+
+.menu-card h1 {
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff, 0 0 25px #ff00ff;
+  margin-bottom: 12px;
+}
+
+.menu-card .muted {
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.menu-card input, .menu-card select {
+  width: 100%;
+  padding: 10px 8px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #00faff;
+  background: #111;
+  color: #00faff;
+  box-shadow: 0 0 8px #00faff inset;
+}
+
+.menu-card button.primary {
+  margin-top: 10px;
+  box-shadow: 0 0 8px #ff00ff, 0 0 20px #ff00ff inset;
+}
+.menu-card button.ghost {
+  color: #00faff;
+  border-color: #00faff;
+  box-shadow: 0 0 6px #00faff;
+}
+
+/* Neon slider */
+/* Neon slider track */
+#aiDepth {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background: #222;
+  outline: none;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  transition: background 0.2s;
+}
+
+/* Neon thumb */
+#aiDepth::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--neon-color);
+  cursor: pointer;
+  box-shadow: 0 0 12px var(--neon-color), 0 0 25px var(--neon-color) inset;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+#aiDepth::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--neon-color);
+  cursor: pointer;
+  box-shadow: 0 0 12px var(--neon-color), 0 0 25px var(--neon-color) inset;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+/* Spark effect on movement */
+#aiDepth.spark::-webkit-slider-thumb {
+  animation: sparkThumb 0.3s ease forwards;
+}
+#aiDepth.spark::-moz-range-thumb {
+  animation: sparkThumb 0.3s ease forwards;
+}
+
+@keyframes sparkThumb {
+  0%   { box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff inset; transform: scale(1.2); }
+  100% { box-shadow: 0 0 12px var(--neon-color), 0 0 25px var(--neon-color) inset; transform: scale(1); }
+}
+
+
+/* define neon color variable for frame */
+:root {
+  --neon-color: #00faff;
+}
+
+.menu-card, #board {
+  border: 2px solid var(--neon-color);
+  box-shadow: 0 0 10px var(--neon-color), 0 0 30px var(--neon-color) inset;
+  border-radius: 12px;
+  transition: all 1s ease;
+  animation: pulseNeon 1.5s infinite alternate;
+}
+
+@keyframes pulseNeon {
+  0%   { box-shadow: 0 0 15px var(--neon-color), 0 0 30px var(--neon-color) inset; }
+  50%  { box-shadow: 0 0 25px var(--neon-color), 0 0 40px var(--neon-color) inset; }
+  100% { box-shadow: 0 0 15px var(--neon-color), 0 0 30px var(--neon-color) inset; }
+}
+
+

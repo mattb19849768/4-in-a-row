@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Connect Four — Game</title>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="left">
+
+    </div>
+    <div class="center">
+      <div id="status" class="status">Loading…</div>
+    </div>
+    <div class="right">
+      <div class="controls-inline">
+        <button id="startBtn" class="primary">Restart</button>
+        <button id="undoBtn" class="ghost">Undo</button>
+        <button id="resetBtn" class="ghost">Reset</button>
+        <button id="aiVsAiBtn" class="ghost">AI vs AI</button>
+<button id="homeBtn" class="ghost">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round"
+       style="margin-right:6px;">
+    <path d="M3 9l9-7 9 7"></path>
+    <path d="M9 22V12h6v10"></path>
+  </svg>
+
+</button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Main game area -->
+  <main class="game-area">
+    <section class="board-pane" aria-label="Connect Four game area">
+      <div id="board" class="board"></div>
+    </section>
+  </main>
+
+  <!-- Modal for Win/Draw -->
+<div id="winModal" style="display:none">
+  <div class="modal-content">
+    <span id="modalClose" class="modal-close">&times;</span>
+    <h2 id="winnerText"></h2>
+    <button id="modalRestart" class="primary">Restart Game</button>
+  </div>
+</div>
+
+
+  <script src="script.js" defer></script>
+<script>
+let neonCyan = true;
+
+function swapNeonColor() {
+  const newColor = neonCyan ? '#ff00ff' : '#00faff';
+  document.documentElement.style.setProperty('--neon-color', newColor);
+  neonCyan = !neonCyan;
+}
+
+// every 10 seconds
+setInterval(swapNeonColor, 10000);
+</script>
+
+
+</body>
+</html>

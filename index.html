@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Connect Four — Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="menu">
+    <div class="menu-card">
+      <h1>Connect Four</h1>
+      <p class="muted">Prepare players, choose mode and difficulty — then press Start.</p>
+
+      <form id="setupForm" class="setup" autocomplete="off">
+        <label>Mode</label>
+        <select id="mode" name="mode">
+          <option value="pvp">Two players (local)</option>
+          <option value="pve">Player vs Computer</option>
+          <option value="ai_v_ai">AI vs AI (watch)</option>
+        </select>
+
+        <div class="row">
+          <div class="col">
+            <label>Player 1 name</label>
+            <input id="p1" name="p1" type="text" placeholder="Player 1" value="Player 1">
+          </div>
+          <div class="col">
+            <label>Player 2 name</label>
+            <input id="p2" name="p2" type="text" placeholder="Player 2 / Computer" value="Player 2">
+          </div>
+        </div>
+
+        <label>AI Strength (approx search depth)</label>
+        <div class="row">
+          <input id="aiDepth" name="aiDepth" type="range" min="2" max="8" value="5">
+          <output for="aiDepth" id="aiDepthOut">5</output>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="primary">Start Game</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+<script>
+  const form = document.getElementById('setupForm');
+  const depth = document.getElementById('aiDepth');
+  const depthOut = document.getElementById('aiDepthOut');
+  depth.addEventListener('input', ()=> depthOut.textContent = depth.value);
+
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const data = new FormData(form);
+    const qs = new URLSearchParams({
+      mode: data.get('mode'),
+      p1: data.get('p1') || 'Player 1',
+      p2: data.get('p2') || (data.get('mode') === 'pve' ? 'Computer' : 'Player 2'),
+      depth: data.get('aiDepth') || '5',
+    });
+    // open game with settings
+    window.location.href = `game.html?${qs.toString()}`;
+  });
+
+ 
+    //window.location.href = `game.html?${qs.toString()}`;
+  //});
+</script>
+<script>
+let neonCyan = true;
+
+function swapNeonColor() {
+  const newColor = neonCyan ? '#ff00ff' : '#00faff';
+  document.documentElement.style.setProperty('--neon-color', newColor);
+  neonCyan = !neonCyan;
+}
+
+// every 10 seconds
+setInterval(swapNeonColor, 10000);
+</script>
+
+<script>
+const slider = document.getElementById('aiDepth');
+
+slider.addEventListener('input', () => {
+  // trigger sparks
+  slider.classList.add('spark');
+  // remove class after animation ends
+  setTimeout(() => slider.classList.remove('spark'), 300);
+  // update output display
+  document.getElementById('aiDepthOut').textContent = slider.value;
+});
+</script>
+
+
+</body>
+</html>
