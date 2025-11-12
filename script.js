@@ -271,6 +271,24 @@ function restartGame(){
   updateStatus();
 }
 
+// --- Modal close handler ---
+const modalCloseBtn = document.querySelector('.modal-close');
+if (modalCloseBtn) {
+  modalCloseBtn.addEventListener('click', () => {
+    // Optional small fade-out animation
+    const winModal = document.getElementById('winModal');
+    if (winModal) {
+      winModal.style.animation = 'fadeIn 0.3s reverse ease';
+      setTimeout(() => {
+        window.location.href = 'index.html'; // redirect to home
+      }, 200);
+    } else {
+      window.location.href = 'index.html';
+    }
+  });
+}
+
+
 // --- INIT ---
 createBoard();
 updateStatus();

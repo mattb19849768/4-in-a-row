@@ -241,40 +241,62 @@ button.ghost:hover,
 .cell:hover { box-shadow: 0 0 12px var(--neon-color, #00eaff) inset; }
 
 /* Modal */
-.modal-overlay {
+/* ===== Centered Win Modal (fixed) ===== */
+#winModal {
+  display: none;               /* shown via JS as 'flex' */
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  animation: fadeIn 0.3s ease;
 }
 
-.modal-content {
+#winModal .modal-content {
+  position: relative; /* ✅ makes .modal-close stay inside */
   background: #0d0d20;
   color: var(--neon-cyan, #00eaff);
   border: 2px solid var(--neon-cyan, #00eaff);
-  box-shadow: 0 0 18px var(--neon-cyan, #00eaff), 0 0 38px var(--neon-cyan, #00eaff), inset 0 0 10px var(--neon-cyan, #00eaff);
-  padding: 20px;
+  box-shadow:
+     0 0 18px var(--neon-cyan, #00eaff),
+     0 0 38px var(--neon-cyan, #00eaff),
+     inset 0 0 10px var(--neon-cyan, #00eaff);
+  padding: 32px 20px;
   border-radius: 10px;
   width: 92%;
   max-width: 360px;
   text-align: center;
-  animation: modalpop .22s ease-out;
+  animation: modalpop 0.25s ease-out;
 }
 
-.modal-close {
-  float: right;
-  font-size: 20px;
+#winModal .modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 22px;
   cursor: pointer;
   color: var(--neon-cyan, #00eaff);
+  text-shadow: 0 0 10px var(--neon-cyan, #00eaff);
+  transition: color 0.2s, transform 0.2s;
+}
+
+#winModal .modal-close:hover {
+  color: var(--neon-pink, #ff00ff);
+  transform: scale(1.2);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
 }
 
 @keyframes modalpop {
-  from { transform: scale(.92); opacity: 0 }
-  to   { transform: scale(1); opacity: 1 }
+  from { transform: scale(0.9); opacity: 0 }
+  to   { transform: scale(1);   opacity: 1 }
 }
+
 
 /* Responsive */
 @media (max-width: 500px) {
